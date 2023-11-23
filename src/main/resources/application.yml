@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: demo-spring-perf
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+        generate_statistics: true
+  database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+  datasource:
+#    hikari:
+#      connection-timeout: 110000
+#      minimum-idle: 2
+#      maximum-pool-size: 2
+    url: jdbc:postgresql://localhost/france
+    username: france
+    password: france

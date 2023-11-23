@@ -21,7 +21,7 @@ import java.util.Set;
 @Setter
 public class City extends AbstractLocalization {
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "postal_code_cities",
             joinColumns = @JoinColumn(name = "city_insee_code"),
@@ -29,9 +29,9 @@ public class City extends AbstractLocalization {
     )
     Set<PostalCode> postalCodes;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Department department;
 
-    @OneToMany(mappedBy = "city", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
     private List<Museum> museums;
 }

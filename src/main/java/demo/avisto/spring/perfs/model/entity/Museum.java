@@ -19,14 +19,14 @@ public class Museum {
     @Id
     private int id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private City city;
 
     private String name;
 
     private String address;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "postal_code")
     private PostalCode postalCode;
 

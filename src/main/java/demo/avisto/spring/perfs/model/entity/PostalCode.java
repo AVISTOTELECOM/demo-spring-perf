@@ -20,9 +20,9 @@ public class PostalCode {
     @Id
     private String code;
 
-    @ManyToMany(mappedBy = "postalCodes", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "postalCodes", fetch = FetchType.LAZY)
     private List<City> cities;
 
-    @OneToMany(mappedBy = "postalCode", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "postalCode", fetch = FetchType.LAZY)
     private List<Museum> museums;
 }

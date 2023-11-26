@@ -25,4 +25,5 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	runtimeOnly 'org.postgresql:postgresql:42.5.1'
+	implementation 'com.cosium.spring.data:spring-data-jpa-entity-graph:3.1.0'
 }

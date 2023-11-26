@@ -16,3 +16,8 @@ spring:
     url: jdbc:postgresql://localhost/france
     username: france
     password: france
+
+
+#logging.level.org.hibernate:
+#  SQL: DEBUG
+#  type: TRACE

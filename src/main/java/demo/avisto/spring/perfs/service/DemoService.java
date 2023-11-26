@@ -1,5 +1,6 @@
 package demo.avisto.spring.perfs.service;
 
+import com.cosium.spring.data.jpa.entity.graph.domain2.NamedEntityGraph;
 import demo.avisto.spring.perfs.dao.CityRepository;
 import demo.avisto.spring.perfs.dao.DepartmentRepository;
 import demo.avisto.spring.perfs.dao.MuseumRepository;
@@ -8,6 +9,7 @@ import demo.avisto.spring.perfs.model.entity.City;
 import demo.avisto.spring.perfs.model.entity.Department;
 import demo.avisto.spring.perfs.model.entity.Museum;
 import demo.avisto.spring.perfs.model.entity.Region;
+import demo.avisto.spring.perfs.util.Constants;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.function.Function;
+import java.util.stream.StreamSupport;
 
 @Service
 @RequiredArgsConstructor
@@ -25,44 +28,36 @@ public class DemoService {
     private final CityRepository cityRepository;
     private final MuseumRepository museumRepository;
 
-    @Transactional(readOnly = true)
     public <R> List<R> getRegions(Function<Region, R> mapper) {
-        return getRegions().stream().map(mapper).toList();
+        return StreamSupport.stream(getRegions().spliterator(), false).map(mapper).toList();
     }
 
-    @Transactional(readOnly = true)
-    public List<Region> getRegions() {
-        return regionRepository.findAll();
+    public Iterable<Region> getRegions() {
+        return regionRepository.findAll(new NamedEntityGraph(Constants.EntityGraphs.REGION_WITH_DEPARTMENTS));
     }
 
-    @Transactional(readOnly = true)
     public <D> List<D> getDepartments(Function<Department, D> mapper) {
-        return getDepartments().stream().map(mapper).toList();
+        return StreamSupport.stream(getDepartments().spliterator(), false).map(mapper).toList();
     }
 
-    @Transactional(readOnly = true)
-    public List<Department> getDepartments() {
-        return departmentRepository.findAll();
+    public Iterable<Department> getDepartments() {
+        return departmentRepository.findAll(new NamedEntityGraph(Constants.EntityGraphs.DEPARTMENT_WITH_REGION_AND_CITIES));
     }
 
-    @Transactional(readOnly = true)
     public <C> List<C> getCities(Function<City, C> mapper) {
-        return getCities().stream().map(mapper).toList();
+        return StreamSupport.stream(getCities().spliterator(), false).map(mapper).toList();
     }
 
-    @Transactional(readOnly = true)
-    public List<City> getCities() {
-        return cityRepository.findAll();
+    public Iterable<City> getCities() {
+        return cityRepository.findAll(new NamedEntityGraph(Constants.EntityGraphs.CITY_WITH_DEPARTMENT_AND_MUSEUMS_AND_POSTAL_CODES));
     }
 
-    @Transactional(readOnly = true)
     public <M> List<M> getMuseums(Function<Museum, M> mapper) {
-        return getMuseums().stream().map(mapper).toList();
+        return StreamSupport.stream(getMuseums().spliterator(), false).map(mapper).toList();
     }
 
-    @Transactional(readOnly = true)
-    public List<Museum> getMuseums() {
-        return museumRepository.findAll();
+    public Iterable<Museum> getMuseums() {
+        return museumRepository.findAll(new NamedEntityGraph(Constants.EntityGraphs.MUSEUM_WITH_CITY_AND_POSTAL_CODE));
     }
 
     @Transactional(readOnly = true)
@@ -72,36 +67,30 @@ public class DemoService {
 
     @Transactional(readOnly = true)
     public Region getRegionById(String id) {
-        return regionRepository.findById(id).orElseThrow(RuntimeException::new);
+        return regionRepository.findById(id, new NamedEntityGraph(Constants.EntityGraphs.REGION_WITH_DEPARTMENTS_WITH_CONTIGOUS_DEPARTMENTS_AND_CITIES_WITH_MUSEUMS_AND_POSTAL_CODES)).orElseThrow(RuntimeException::new);
     }
 
-    @Transactional(readOnly = true)
     public <D> D getDepartmentById(String id, Function<Department, D> mapper) {
         return mapper.apply(getDepartmentById(id));
     }
 
-    @Transactional(readOnly = true)
     public Department getDepartmentById(String id) {
-        return departmentRepository.findById(id).orElseThrow(RuntimeException::new);
+        return departmentRepository.findById(id, new NamedEntityGraph(Constants.EntityGraphs.DEPARTMENTS_WITH_REGION_AND_CONTIGOUS_DEPARTMENTS_AND_CITIES_WITH_MUSEUMS_AND_POSTAL_CODES)).orElseThrow(RuntimeException::new);
     }
 
-    @Transactional(readOnly = true)
     public <C> C getCityById(String id, Function<City, C> mapper) {
         return mapper.apply(getCityById(id));
     }
 
-    @Transactional(readOnly = true)
     public City getCityById(String id) {
-        return cityRepository.findById(id).orElseThrow(RuntimeException::new);
+        return cityRepository.findById(id, new NamedEntityGraph(Constants.EntityGraphs.CITY_WITH_DEPARTMENT_AND_MUSEUMS_AND_POSTAL_CODES)).orElseThrow(RuntimeException::new);
     }
 
-    @Transactional(readOnly = true)
     public <M> M getMuseumById(int id, Function<Museum, M> mapper) {
         return mapper.apply(getMuseumById(id));
     }
 
-    @Transactional(readOnly = true)
     public Museum getMuseumById(int id) {
-        return museumRepository.findById(id).orElseThrow(RuntimeException::new);
+        return museumRepository.findById(id, new NamedEntityGraph(Constants.EntityGraphs.MUSEUM_WITH_CITY_AND_POSTAL_CODE)).orElseThrow(RuntimeException::new);
     }
 }

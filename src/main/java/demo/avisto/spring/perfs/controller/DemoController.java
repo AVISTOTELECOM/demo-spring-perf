@@ -68,7 +68,7 @@ public class DemoController {
     @GetMapping("/cities/{inseeCode}")
     @ResponseStatus(HttpStatus.OK)
     @TimeStatistic("/cities/inseeCode Request : {} ms")
-    public CityDtoOut getCitie(@PathVariable String inseeCode) {
+    public CityDtoOut getCity(@PathVariable String inseeCode) {
         return demoService.getCityById(inseeCode, CityDtoOut::new);
     }
 

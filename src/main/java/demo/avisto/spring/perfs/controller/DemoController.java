@@ -10,6 +10,7 @@ import demo.avisto.spring.perfs.model.dto.out.RegionShortDtoOut;
 import demo.avisto.spring.perfs.service.DemoService;
 import demo.avisto.spring.perfs.util.TimeStatistic;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,29 +27,29 @@ public class DemoController {
     @GetMapping("/regions")
     @ResponseStatus(HttpStatus.OK)
     @TimeStatistic("/regions Request : {} ms")
-    public List<RegionShortDtoOut> getRegions() {
-        return demoService.getRegions(RegionShortDtoOut::new);
+    public List<RegionShortDtoOut> getRegions(Pageable pageable) {
+        return demoService.getRegions(RegionShortDtoOut::new, pageable);
     }
 
     @GetMapping("/departments")
     @ResponseStatus(HttpStatus.OK)
     @TimeStatistic("/departments Request : {} ms")
-    public List<DepartmentShortDtoOut> getDepartments() {
-        return demoService.getDepartments(DepartmentShortDtoOut::new);
+    public List<DepartmentShortDtoOut> getDepartments(Pageable pageable) {
+        return demoService.getDepartments(DepartmentShortDtoOut::new, pageable);
     }
 
     @GetMapping("/cities")
     @ResponseStatus(HttpStatus.OK)
     @TimeStatistic("/cities Request : {} ms")
-    public List<CityDtoOut> getCities() {
-        return demoService.getCities(CityDtoOut::new);
+    public List<CityDtoOut> getCities(Pageable pageable) {
+        return demoService.getCities(CityDtoOut::new, pageable);
     }
 
     @GetMapping("/museums")
     @ResponseStatus(HttpStatus.OK)
     @TimeStatistic("/museums Request : {} ns")
-    public List<MuseumShortDtoOut> getMuseums() {
-        return demoService.getMuseums(MuseumShortDtoOut::new);
+    public List<MuseumShortDtoOut> getMuseums(Pageable pageable) {
+        return demoService.getMuseums(MuseumShortDtoOut::new, pageable);
     }
 
     @GetMapping("/regions/{inseeCode}")

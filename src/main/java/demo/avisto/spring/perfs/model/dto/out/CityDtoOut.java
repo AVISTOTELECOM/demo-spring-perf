@@ -10,13 +10,15 @@ import java.util.List;
 public class CityDtoOut {
     private final String name;
     private final String inseeCode;
+    private final LocalizationShortDto department;
     private final List<String> postalCodes;
-    private final List<MuseumDtoOut> museums;
+    private final List<MuseumShortDto> museums;
 
     public CityDtoOut(City city) {
         name = city.getName();
         inseeCode = city.getInseeCode();
         postalCodes = city.getPostalCodes().stream().map(PostalCode::getCode).toList();
-        museums = city.getMuseums().stream().map(MuseumDtoOut::new).toList();
+        department = LocalizationShortDto.of(city.getDepartment());
+        museums = city.getMuseums().stream().map(MuseumShortDto::of).toList();
     }
 }

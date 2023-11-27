@@ -2,8 +2,11 @@ package demo.avisto.spring.perfs.controller;
 
 import demo.avisto.spring.perfs.model.dto.out.CityDtoOut;
 import demo.avisto.spring.perfs.model.dto.out.DepartmentDtoOut;
+import demo.avisto.spring.perfs.model.dto.out.DepartmentShortDtoOut;
 import demo.avisto.spring.perfs.model.dto.out.MuseumDtoOut;
+import demo.avisto.spring.perfs.model.dto.out.MuseumShortDtoOut;
 import demo.avisto.spring.perfs.model.dto.out.RegionDtoOut;
+import demo.avisto.spring.perfs.model.dto.out.RegionShortDtoOut;
 import demo.avisto.spring.perfs.service.DemoService;
 import demo.avisto.spring.perfs.util.TimeStatistic;
 import lombok.RequiredArgsConstructor;
@@ -23,15 +26,15 @@ public class DemoController {
     @GetMapping("/regions")
     @ResponseStatus(HttpStatus.OK)
     @TimeStatistic("/regions Request : {} ms")
-    public List<RegionDtoOut> getRegions() {
-        return demoService.getRegions(RegionDtoOut::new);
+    public List<RegionShortDtoOut> getRegions() {
+        return demoService.getRegions(RegionShortDtoOut::new);
     }
 
     @GetMapping("/departments")
     @ResponseStatus(HttpStatus.OK)
     @TimeStatistic("/departments Request : {} ms")
-    public List<DepartmentDtoOut> getDepartments() {
-        return demoService.getDepartments(DepartmentDtoOut::new);
+    public List<DepartmentShortDtoOut> getDepartments() {
+        return demoService.getDepartments(DepartmentShortDtoOut::new);
     }
 
     @GetMapping("/cities")
@@ -44,8 +47,8 @@ public class DemoController {
     @GetMapping("/museums")
     @ResponseStatus(HttpStatus.OK)
     @TimeStatistic("/museums Request : {} ns")
-    public List<MuseumDtoOut> getMuseums() {
-        return demoService.getMuseums(MuseumDtoOut::new);
+    public List<MuseumShortDtoOut> getMuseums() {
+        return demoService.getMuseums(MuseumShortDtoOut::new);
     }
 
     @GetMapping("/regions/{inseeCode}")

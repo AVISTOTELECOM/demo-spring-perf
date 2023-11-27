@@ -13,6 +13,6 @@ import java.util.List;
 @Getter
 public class Region extends AbstractLocalization {
 
-    @OneToMany(mappedBy = "region", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "region", fetch = FetchType.LAZY)
     private List<Department> departments;
 }

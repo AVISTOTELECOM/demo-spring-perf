@@ -23,7 +23,7 @@ import java.util.Set;
 @Setter
 public class Department extends AbstractLocalization {
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "contigous_department",
             joinColumns = @JoinColumn(name = "department1_insee_code"),
@@ -33,7 +33,7 @@ public class Department extends AbstractLocalization {
     @Setter(AccessLevel.NONE)
     private List<Department> nearToDepartments;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "contigous_department",
             joinColumns = @JoinColumn(name = "department2_insee_code"),
@@ -48,9 +48,9 @@ public class Department extends AbstractLocalization {
     private Set<Department> contigousDepartments;
 
 
-    @OneToMany(mappedBy = "department", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "department", fetch = FetchType.LAZY)
     private List<City> cities;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Region region;
 
     public Set<Department> getContigousDepartments() {

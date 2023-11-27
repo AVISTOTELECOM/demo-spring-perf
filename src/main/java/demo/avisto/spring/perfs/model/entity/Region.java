@@ -29,13 +29,6 @@ import java.util.List;
                 },
                 subgraphs = {
                         @NamedSubgraph(
-                                name = Constants.SubEntityGraphs.CITIES_WITH_MUSEUMS_AND_POSTAL_CODES,
-                                attributeNodes = {
-                                        @NamedAttributeNode("museums"),
-                                        @NamedAttributeNode("postalCodes")
-                                }
-                        ),
-                        @NamedSubgraph(
                                 name = Constants.SubEntityGraphs.DEPARTMENTS_WITH_CONTIGOUS_DEPARTMENTS_AND_CITIES_WITH_MUSEUMS_AND_POSTAL_CODES,
                                 attributeNodes = {
                                         @NamedAttributeNode(
@@ -43,6 +36,13 @@ import java.util.List;
                                                 subgraph = Constants.SubEntityGraphs.CITIES_WITH_MUSEUMS_AND_POSTAL_CODES),
                                         @NamedAttributeNode("nearAtDepartments"),
                                         @NamedAttributeNode("nearToDepartments")
+                                }
+                        ),
+                        @NamedSubgraph(
+                                name = Constants.SubEntityGraphs.CITIES_WITH_MUSEUMS_AND_POSTAL_CODES,
+                                attributeNodes = {
+                                        @NamedAttributeNode("museums"),
+                                        @NamedAttributeNode("postalCodes")
                                 }
                         )
                 }

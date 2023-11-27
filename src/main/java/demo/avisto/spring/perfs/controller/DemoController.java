@@ -74,7 +74,7 @@ public class DemoController {
 
     @GetMapping("/museums/{id}")
     @ResponseStatus(HttpStatus.OK)
-    @TimeStatistic("/museums/id Request : {} ns")
+    @TimeStatistic("/museums/id Request : {} ms")
     public MuseumDtoOut getMuseum(@PathVariable int id) {
         return demoService.getMuseumById(id, MuseumDtoOut::new);
     }

@@ -10,6 +10,7 @@ import demo.avisto.spring.perfs.model.entity.Museum;
 import demo.avisto.spring.perfs.model.entity.Region;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,43 +27,43 @@ public class DemoService {
     private final MuseumRepository museumRepository;
 
     @Transactional(readOnly = true)
-    public <R> List<R> getRegions(Function<Region, R> mapper) {
-        return getRegions().stream().map(mapper).toList();
+    public <R> List<R> getRegions(Function<Region, R> mapper, Pageable pageable) {
+        return getRegions(pageable).stream().map(mapper).toList();
     }
 
     @Transactional(readOnly = true)
-    public List<Region> getRegions() {
-        return regionRepository.findAll();
+    public List<Region> getRegions(Pageable pageable) {
+        return regionRepository.findAll(pageable).getContent();
     }
 
     @Transactional(readOnly = true)
-    public <D> List<D> getDepartments(Function<Department, D> mapper) {
-        return getDepartments().stream().map(mapper).toList();
+    public <D> List<D> getDepartments(Function<Department, D> mapper, Pageable pageable) {
+        return getDepartments(pageable).stream().map(mapper).toList();
     }
 
     @Transactional(readOnly = true)
-    public List<Department> getDepartments() {
-        return departmentRepository.findAll();
+    public List<Department> getDepartments(Pageable pageable) {
+        return departmentRepository.findAll(pageable).getContent();
     }
 
     @Transactional(readOnly = true)
-    public <C> List<C> getCities(Function<City, C> mapper) {
-        return getCities().stream().map(mapper).toList();
+    public <C> List<C> getCities(Function<City, C> mapper, Pageable pageable) {
+        return getCities(pageable).stream().map(mapper).toList();
     }
 
     @Transactional(readOnly = true)
-    public List<City> getCities() {
-        return cityRepository.findAll();
+    public List<City> getCities(Pageable pageable) {
+        return cityRepository.findAll(pageable).getContent();
     }
 
     @Transactional(readOnly = true)
-    public <M> List<M> getMuseums(Function<Museum, M> mapper) {
-        return getMuseums().stream().map(mapper).toList();
+    public <M> List<M> getMuseums(Function<Museum, M> mapper, Pageable pageable) {
+        return getMuseums(pageable).stream().map(mapper).toList();
     }
 
     @Transactional(readOnly = true)
-    public List<Museum> getMuseums() {
-        return museumRepository.findAll();
+    public List<Museum> getMuseums(Pageable pageable) {
+        return museumRepository.findAll(pageable).getContent();
     }
 
     @Transactional(readOnly = true)

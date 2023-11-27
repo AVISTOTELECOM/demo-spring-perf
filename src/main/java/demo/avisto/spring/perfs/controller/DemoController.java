@@ -68,13 +68,13 @@ public class DemoController {
     @GetMapping("/cities/{inseeCode}")
     @ResponseStatus(HttpStatus.OK)
     @TimeStatistic("/cities/inseeCode Request : {} ms")
-    public CityDtoOut getCitie(@PathVariable String inseeCode) {
+    public CityDtoOut getCity(@PathVariable String inseeCode) {
         return demoService.getCityById(inseeCode, CityDtoOut::new);
     }
 
     @GetMapping("/museums/{id}")
     @ResponseStatus(HttpStatus.OK)
-    @TimeStatistic("/museums/id Request : {} ns")
+    @TimeStatistic("/museums/id Request : {} ms")
     public MuseumDtoOut getMuseum(@PathVariable int id) {
         return demoService.getMuseumById(id, MuseumDtoOut::new);
     }

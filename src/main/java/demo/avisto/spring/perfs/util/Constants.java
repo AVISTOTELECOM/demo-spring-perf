@@ -1,0 +1,24 @@
+package demo.avisto.spring.perfs.util;
+
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class Constants {
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    public static final class EntityGraphs{
+        public static final String REGION_WITH_DEPARTMENTS = "REGION_WITH_DEPARTMENTS";
+        public static final String REGION_WITH_DEPARTMENTS_WITH_CONTIGOUS_DEPARTMENTS_AND_CITIES_WITH_MUSEUMS_AND_POSTAL_CODES = "REGION_WITH_DEPARTMENTS_WITH_CONTIGOUS_DEPARTMENTS_AND_CITIES_WITH_MUSEUMS_AND_POSTAL_CODES";
+        public static final String DEPARTMENT_WITH_REGION_AND_CITIES = "DEPARTMENT_WITH_REGION_AND_CITIES";
+        public static final String DEPARTMENTS_WITH_REGION_AND_CONTIGOUS_DEPARTMENTS_AND_CITIES_WITH_MUSEUMS_AND_POSTAL_CODES = "DEPARTMENTS_WITH_REGION_AND_CONTIGOUS_DEPARTMENTS_AND_CITIES_WITH_MUSEUMS_AND_POSTAL_CODES";
+        public static final String CITY_WITH_DEPARTMENT_AND_MUSEUMS_AND_POSTAL_CODES = "CITY_WITH_DEPARTMENT_AND_MUSEUMS_AND_POSTAL_CODES";
+        public static final String MUSEUM_WITH_CITY_AND_POSTAL_CODE = "MUSEUM_WITH_CITY_AND_POSTAL_CODE";
+    }
+
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    public static final class SubEntityGraphs{
+        public static final String DEPARTMENTS_WITH_CONTIGOUS_DEPARTMENTS_AND_CITIES_WITH_MUSEUMS_AND_POSTAL_CODES = "DEPARTMENTS_WITH_CONTIGOUS_DEPARTMENTS_AND_CITIES_WITH_MUSEUMS_AND_POSTAL_CODES";
+        public static final String CITIES_WITH_MUSEUMS_AND_POSTAL_CODES = "CITIES_WITH_MUSEUMS_AND_POSTAL_CODES";
+    }
+
+}
